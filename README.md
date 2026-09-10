@@ -1,4 +1,4 @@
-# Anilibria-Api-Client
+# anilibria-api-client
 
 
 [![pypi](https://img.shields.io/pypi/v/anilibria-api-client.svg)](https://pypi.org/project/anilibria-api-client/) [![LICENSE](https://img.shields.io/github/license/whynotix/anilibria-api-client)](https://github.com/whynotix/Anilibria-Api-Client/blob/main/LICENSE) [![Python](https://img.shields.io/pypi/pyversions/anilibria-api-client.svg)](https://pypi.org/project/anilibria-api-client/)
@@ -18,7 +18,7 @@ Developed and tested with Python 3.13. While it may work with other versions (ol
 $ pip install anilibria-api-client
 ```
 
-## Usage
+## Usage (ts is old segment and will be deleted in v1.0.0rc3)
 
 ```python
 from anilibria_api_client.api_client import AsyncAnilibriaAPI  # Client
