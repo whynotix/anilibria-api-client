@@ -1,7 +1,7 @@
 import pytest
+from anilibria_api_client.models.responses import *
 
 from anilibria_api_client.api_client import AsyncAnilibriaAPI
-from anilibria_api_client.models.responses import *
 
 
 @pytest.mark.asyncio

@@ -2,9 +2,9 @@ import os  # Path / Makedir
 
 import aiofiles
 import m3u8_To_MP4
+from anilibria_api_types.errors import ValidationError
 
 from anilibria_api_client.api_client import AsyncAnilibriaAPI
-from anilibria_api_types.errors import ValidationError
 
 
 async def auth(

@@ -1,6 +1,4 @@
 import pytest
-
-from anilibria_api_client.api_client import AsyncAnilibriaAPI
 from anilibria_api_client.models.legacy_models import (
     AgeRating,
     CollectionType,
@@ -9,6 +7,8 @@ from anilibria_api_client.models.legacy_models import (
     TimeCode,
 )
 from anilibria_api_client.models.responses import *
+
+from anilibria_api_client.api_client import AsyncAnilibriaAPI
 
 
 @pytest.mark.asyncio
