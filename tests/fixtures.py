@@ -18,6 +18,7 @@ def get_auth_params() -> list[str, str]:
 
     return [login, password]
 
+
 @pytest_asyncio.fixture()
 async def anilibria_api_client() -> typing.AsyncGenerator[AsyncAnilibriaAPI]:
     token = os.getenv("ANILIBRIA_API_TOKEN")

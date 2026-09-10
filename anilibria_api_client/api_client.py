@@ -1,17 +1,14 @@
-import logging
 from typing import Any
 
-import aiohttp
-
-from .base_api.api_class import AsyncBaseAPI
-from .methods import (
+from anilibria_api_types.methods import (
     AccountsMethod,
-    AdsMethod,
     AnimeMethod,
     AppMethod,
     MediaMethod,
     TeamsMethod,
 )
+
+from anilibria_api_client.base_api.api_class import API
 
 
 logging.basicConfig(level=logging.ERROR)
@@ -24,11 +21,10 @@ class AsyncAnilibriaAPI(AsyncBaseAPI):
 
     def __init__(
         self,
-        base_url: str = "https://anilibria.top/api/v1",
+        base_url: str = "https://aniliberty.top/api/v1/",  # Edited because previous url is not working
         token: str | None = None,
-        proxy: str | None = None,
-        proxy_auth: aiohttp.BasicAuth | None = None,
-        proxy_headers: dict[str, str] | None = None,
+        timeout: int | None = None,
+        api: "API | None" = None,
     ) -> None:
         """
         Инициализация асинхронного API клиента.
@@ -47,12 +43,10 @@ class AsyncAnilibriaAPI(AsyncBaseAPI):
         if token is not None:
             headers["Authorization"] = f"Bearer {token}"
 
-        super().__init__(
-            base_url=base_url,
-            headers=headers,
-            proxy=proxy,
-            proxy_auth=proxy_auth,
-            proxy_headers=proxy_headers,
+        self.api = (
+            api
+            if api is not None
+            else API(base_url=base_url, headers=headers, timeout=timeout)
         )
 
         self.accounts = AccountsMethod(api=self)

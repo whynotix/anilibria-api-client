@@ -26,18 +26,22 @@ $ pip install anilibria-api-client
 ## Usage
 
 ```python
-from anilibria_api_client.api_client import AsyncAnilibriaAPI # Client
-from anilibria_api_client.exceptions import AnilibriaException, AnilibriaValidationException # Errors
-from anilibria_api_client.types import * # Types for some methods
-from anilibria_api_client.models import * # Input models for some methods
-from anilibria_api_client.responses import * # Response models generated from OpenAPI
-from anilibria_api_client.helper import * # Download anime, save torrents files and more
+from anilibria_api_client.api_client import AsyncAnilibriaAPI  # Client
+from anilibria_api_client.exceptions import (
+    AnilibriaException,
+    AnilibriaValidationException,
+)  # Errors
+from anilibria_api_client.types import *  # Types for some methods
+from anilibria_api_client.models import *  # Input models for some methods
+from anilibria_api_client.responses import *  # Response models generated from OpenAPI
+from anilibria_api_client.helper import *  # Download anime, save torrents files and more
+
 
 async def main():
     async with AsyncAnilibriaAPI() as api:
         await api.teams.users(include="nickname")
 
-    api = AsyncAnilibriaAPI() # like js support
+    api = AsyncAnilibriaAPI()  # like js support
     await api.teams.users(include="nickname")
 ```
 
