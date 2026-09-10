@@ -1,11 +1,14 @@
-import logging
-import aiohttp
+from typing import Any
 
-from typing import Any, TYPE_CHECKING
-if TYPE_CHECKING:
-    from anilibria_api_client.base_api.api_class import API
+from anilibria_api_types.methods import (
+    AccountsMethod,
+    AnimeMethod,
+    AppMethod,
+    MediaMethod,
+    TeamsMethod,
+)
 
-from anilibria_api_types.methods import AccountsMethod, AnimeMethod, AppMethod, MediaMethod, TeamsMethod
+from anilibria_api_client.base_api.api_class import API
 
 
 class AsyncAnilibriaAPI:
@@ -15,10 +18,10 @@ class AsyncAnilibriaAPI:
 
     def __init__(
         self,
-        base_url: str = "https://aniliberty.top/api/v1/", # Edited because previous url is not working 
+        base_url: str = "https://aniliberty.top/api/v1/",  # Edited because previous url is not working
         token: str | None = None,
         timeout: int | None = None,
-        api: 'API | None' = None
+        api: "API | None" = None,
     ) -> None:
         """
         Инициализация асинхронного API клиента.
@@ -34,14 +37,10 @@ class AsyncAnilibriaAPI:
         if token is not None:
             headers["Authorization"] = f"Bearer {token}"
 
-        self.api = ( 
+        self.api = (
             api
             if api is not None
-            else API(
-                base_url=base_url,
-                headers=headers,
-                timeout=timeout
-            )
+            else API(base_url=base_url, headers=headers, timeout=timeout)
         )
 
         self.accounts = AccountsMethod(api=self.api)

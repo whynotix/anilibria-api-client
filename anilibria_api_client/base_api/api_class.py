@@ -1,5 +1,4 @@
 from typing import Any
-from urllib.parse import quote, urlencode, urljoin
 
 import aiohttp
 
@@ -11,6 +10,7 @@ class API:
     Асинхронный класс для работы с API.
     Предоставляет основные методы для отправки HTTP-запросов и работы с URL.
     """
+
     def __init__(
         self,
         base_url: str,

@@ -1,9 +1,9 @@
 import pytest
-
-from anilibria_api_client.base_api.api_class import AsyncBaseAPI
 from anilibria_api_client.exceptions import AnilibriaException
 from anilibria_api_client.models.legacy_models import TimeCode
 from anilibria_api_client.models.responses import *
+
+from anilibria_api_client.base_api.api_class import AsyncBaseAPI
 
 
 @pytest.mark.asyncio
