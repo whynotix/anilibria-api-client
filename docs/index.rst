@@ -12,14 +12,11 @@ Example
 
    from anilibria_api_client.api_client import AsyncAnilibriaAPI # Client
    from anilibria_api_client.exceptions import AnilibriaException, AnilibriaValidationException # Errors
-   from anilibria_api_client.types import * # Types for some methods
-   from anilibria_api_client.models import * # Models for some methods
+   from anilibria_api_types.enums import * # Enums
+   from anilibria_api_types.responses import * # Response models generated from OpenAPI
    from anilibria_api_client.helper import * # Download anime, save torrents files and more
 
    async def main():
-      async with AsyncAnilibriaAPI() as api: # async with
-         await api.teams.users(include="nickname")
-
       api = AsyncAnilibriaAPI()
       await api.teams.users(include="nickname")
 

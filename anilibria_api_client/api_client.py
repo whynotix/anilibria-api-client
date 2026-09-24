@@ -13,15 +13,21 @@ from anilibria_api_client.base_api.api_class import API
 
 class AsyncAnilibriaAPI:
     """
-    Асинхронный клиент для работы с AnilibriaAPI, базируется на AsyncBaseAPI (base_api/api_class.py)
+    Асинхронный клиент для работы с AnilibriaAPI, базируется на API (base_api/api_class.py)
+
+    Жизненным циклом сессии управляет `self.api` (класс `API`):
+    используйте `async with` по `self.api` или вызывайте `await self.api.close()`.
     """
 
     def __init__(
         self,
         base_url: str = "https://aniliberty.top/api/v1/",  # Edited because previous url is not working
         token: str | None = None,
-        timeout: int | None = None,
+        timeout: int = 10,
         api: "API | None" = None,
+        proxy: str | None = None,
+        proxy_auth: str | None = None,
+        proxy_headers: dict[str, str] | None = None,
     ) -> None:
         """
         Инициализация асинхронного API клиента.
@@ -30,6 +36,9 @@ class AsyncAnilibriaAPI:
         :param token: Токен для авторизации (Bearer)
         :param timeout: Таймаут для запроса к API
         :param api: Класс API или свой класс
+        :param proxy: Прокси по умолчанию
+        :param proxy_auth: Аутентификация прокси
+        :param proxy_headers: Заголовки прокси
         """
         headers = {
             "Content-Type": "application/json",
@@ -40,11 +49,17 @@ class AsyncAnilibriaAPI:
         self.api = (
             api
             if api is not None
-            else API(base_url=base_url, headers=headers, timeout=timeout)
+            else API(
+                base_url=base_url,
+                headers=headers,
+                timeout=timeout,
+                proxy=proxy,
+                proxy_auth=proxy_auth,
+                proxy_headers=proxy_headers,
+            )
         )
 
         self.accounts = AccountsMethod(api=self.api)
-        self.ads = AdsMethod(api=self.api)
         self.anime = AnimeMethod(api=self.api)
         self.app = AppMethod(api=self.api)
         self.media = MediaMethod(api=self.api)
@@ -54,6 +69,7 @@ class AsyncAnilibriaAPI:
         self,
         endpoint: str,
         method: str = "GET",
+        params: dict[str, Any] | None = None,
         data: dict[str, Any] | str | bytes | None = None,
         json_data: dict[str, Any] | None = None,
         headers: dict[str, str] | None = None,
@@ -62,8 +78,9 @@ class AsyncAnilibriaAPI:
         """
         Создание своего уникального запроса
 
-        :param method: Метод используемый для запроса, например GET (обязательно)
         :param endpoint: Конечная точка API (обязательно)
+        :param method: Метод используемый для запроса, например GET
+        :param params: Параметры запроса
         :param data: Тело запроса
         :param json_data: JSON тело запроса
         :param headers: Дополнительные заголовки
@@ -74,6 +91,7 @@ class AsyncAnilibriaAPI:
         return await self.api.request(
             method,
             endpoint,
+            params=params,
             data=data,
             json_data=json_data,
             headers=headers,

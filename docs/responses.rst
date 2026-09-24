@@ -1,23 +1,10 @@
 API Responses
 ==========
 
-Accounts methods responses
+Response models are generated from the OpenAPI schema and re-exported from
+`anilibria_api_types.responses`.
 
-.. automodule:: anilibria_api_client.models.responses.accounts
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-App methods responses
-
-.. automodule:: anilibria_api_client.models.responses.app
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Media methods responses
-
-.. automodule:: anilibria_api_client.models.responses.media
+.. automodule:: anilibria_api_types.codegen.responses.models
    :members:
    :undoc-members:
    :show-inheritance:

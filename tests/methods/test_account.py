@@ -1,12 +1,24 @@
 import pytest
-from anilibria_api_client.models.legacy_models import (
-    AgeRating,
-    CollectionType,
-    ContentType,
-    ReleaseCollection,
-    TimeCode,
+from anilibria_api_types.codegen.enums.accounts import (
+    AccountsUsersUserCollectionType,
 )
-from anilibria_api_client.models.responses import *
+from anilibria_api_types.codegen.enums.anime import (
+    AnimeReleasesReleaseAgeRating,
+    AnimeReleasesReleaseType,
+)
+from anilibria_api_types.codegen.responses.models import (
+    AccountsUsersCollectionsReleases,
+    AccountsUsersMeCollectionsReferencesAgeRatings,
+    AccountsUsersMeCollectionsReferencesGenres,
+    AccountsUsersMeCollectionsReferencesTypes,
+    AccountsUsersMeCollectionsReferencesYears,
+    AccountsUsersMeFavoritesReferencesAgeRatings,
+    AccountsUsersMeFavoritesReferencesGenres,
+    AccountsUsersMeFavoritesReferencesSorting,
+    AccountsUsersMeFavoritesReferencesTypes,
+    AccountsUsersMeFavoritesReferencesYears,
+    UsersV1User,
+)
 
 from anilibria_api_client.api_client import AsyncAnilibriaAPI
 
@@ -17,61 +29,39 @@ async def test_col_releases_get_post(
 ) -> None:
     releases_get = (
         await anilibria_api_client.accounts.users_me_collections_releases_get(
-            release_collection=ReleaseCollection(
-                type_of_collection=CollectionType.PLANNED,
-                page=1,
-                limit=10,
-                genres="14,29",
-                types=[ContentType.MOVIE],
-                years="2017",
-                search="Мастера Меча Онлайн: Порядковый ранг",
-                age_ratings=[AgeRating.R16_PLUS],
-                include="",
-            )
+            type_of_collection=AccountsUsersUserCollectionType.PLANNED,
+            page=1,
+            limit=10,
+            f_genres="14,29",
+            f_types=[AnimeReleasesReleaseType.MOVIE],
+            f_years="2017",
+            f_search="Мастера Меча Онлайн: Порядковый ранг",
+            f_age_ratings=[AnimeReleasesReleaseAgeRating.R16_PLUS],
         )
     )
 
     releases_post = (
         await anilibria_api_client.accounts.users_me_collections_releases_post(
-            release_collection=ReleaseCollection(
-                type_of_collection=CollectionType.PLANNED,
-                page=1,
-                limit=10,
-                genres="14,29",
-                types=[ContentType.MOVIE],
-                years="2017",
-                search="Мастера Меча Онлайн: Порядковый ранг",
-                age_ratings=[AgeRating.R16_PLUS],
-                include="",
-            )
+            page=1,
+            limit=10,
+            type_of_collection=AccountsUsersUserCollectionType.PLANNED,
         )
     )
 
-    assert isinstance(releases_get, UsersMeCollectionsReleasesResponse)
-    assert isinstance(releases_post, UsersMeCollectionsReleasesResponse)
+    assert isinstance(releases_get, AccountsUsersCollectionsReleases)
+    assert isinstance(releases_post, AccountsUsersCollectionsReleases)
 
 
 @pytest.mark.asyncio
 async def test_timecodes(
     anilibria_api_client: AsyncAnilibriaAPI,
 ) -> None:
-    response = await anilibria_api_client.accounts.users_me_views_timecodes()
-    await anilibria_api_client.accounts.users_me_views_timecodes_delete(
-        episode_id_list=["9fba7e92-1a4f-4712-962f-b0a683009e66"]
+    response = (
+        await anilibria_api_client.accounts.users_me_views_timecodes_get()
     )
-    await anilibria_api_client.accounts.users_me_views_timecodes_update(
-        timecode_list=[
-            TimeCode(
-                time=500.92,
-                is_watched=False,
-                release_episode_id="9fba7e92-1a4f-4712-962f-b0a683009e66",
-            )
-        ]
-    )
-    (await anilibria_api_client.accounts.users_me_views_timecodes())
 
-    assert response.get_episode_timecodes()
-    assert isinstance(response, UsersMeViewsTimecodesResponse)
+    # Generated method returns the raw JSON array (no model validation).
+    assert isinstance(response, list)
 
 
 @pytest.mark.asyncio
@@ -80,7 +70,7 @@ async def test_me_profile(
 ) -> None:
     response = await anilibria_api_client.accounts.users_me_profile()
 
-    assert isinstance(response, UsersMeProfileResponse)
+    assert isinstance(response, UsersV1User)
 
 
 @pytest.mark.asyncio
@@ -99,16 +89,16 @@ async def test_all_references(
     col_years = await anilibria_api_client.accounts.users_me_collections_references_years()
 
     assert isinstance(
-        fav_age_ratings, UsersMeFavoritesReferencesAgeRatingsResponse
+        fav_age_ratings, AccountsUsersMeFavoritesReferencesAgeRatings
     )
-    assert isinstance(fav_genres, UsersMeFavoritesReferencesGenresResponse)
-    assert isinstance(fav_sorting, UsersMeFavoritesReferencesSortingResponse)
-    assert isinstance(fav_types, UsersMeFavoritesReferencesTypesResponse)
-    assert isinstance(fav_years, UsersMeFavoritesReferencesYearsResponse)
+    assert isinstance(fav_genres, AccountsUsersMeFavoritesReferencesGenres)
+    assert isinstance(fav_sorting, AccountsUsersMeFavoritesReferencesSorting)
+    assert isinstance(fav_types, AccountsUsersMeFavoritesReferencesTypes)
+    assert isinstance(fav_years, AccountsUsersMeFavoritesReferencesYears)
 
     assert isinstance(
-        col_age_ratings, UsersMeCollectionsReferencesAgeRatingsResponse
+        col_age_ratings, AccountsUsersMeCollectionsReferencesAgeRatings
     )
-    assert isinstance(col_genres, UsersMeCollectionsReferencesGenresResponse)
-    assert isinstance(col_types, UsersMeCollectionsReferencesTypesResponse)
-    assert isinstance(col_years, UsersMeCollectionsReferencesYearsResponse)
+    assert isinstance(col_genres, AccountsUsersMeCollectionsReferencesGenres)
+    assert isinstance(col_types, AccountsUsersMeCollectionsReferencesTypes)
+    assert isinstance(col_years, AccountsUsersMeCollectionsReferencesYears)
