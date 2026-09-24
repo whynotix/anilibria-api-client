@@ -9,4 +9,4 @@ async def test_execute(
 ) -> None:
     response = await anilibria_api_client.execute("/app/status")
 
-    assert response
+    assert isinstance(response, dict)

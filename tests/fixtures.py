@@ -11,35 +11,40 @@ from anilibria_api_client.base_api.api_class import API
 dotenv.load_dotenv()
 
 
-def get_auth_params() -> list[str, str]:
+def get_auth_params() -> tuple[str, str]:
     login, password = os.getenv("LOGIN"), os.getenv("PASSWORD")
     if not login or not password:
         raise ValueError("Not LOGIN or PASSWORD in .env file")
 
-    return [login, password]
+    return login, password
+
 
 @pytest_asyncio.fixture()
-async def anilibria_api_client() -> typing.AsyncGenerator[AsyncAnilibriaAPI]:
+async def anilibria_api_client() -> typing.AsyncGenerator[
+    AsyncAnilibriaAPI, None
+]:
     token = os.getenv("ANILIBRIA_API_TOKEN")
     if not token:
         raise ValueError("Not ANILIBRIA_API_TOKEN in .env file")
 
-    async with AsyncAnilibriaAPI(token=token) as api:
-        yield api
+    # The client closes its session automatically after each request.
+    yield AsyncAnilibriaAPI(token=token, timeout=60)
 
 
 @pytest_asyncio.fixture()
-async def base_api_client() -> typing.AsyncGenerator[API]:
+async def base_api_client() -> typing.AsyncGenerator[API, None]:
     token = os.getenv("ANILIBRIA_API_TOKEN")
-    headers = {}
-
     if not token:
         raise ValueError("Not ANILIBRIA_API_TOKEN in .env file")
 
-    headers["Content-Type"] = "application/json"
-    headers["Authorization"] = f"Bearer {token}"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {token}",
+    }
 
     async with API(
-        base_url="https://anilibria.top/api/v1", headers=headers
+        base_url="https://aniliberty.top/api/v1/",
+        headers=headers,
+        timeout=60,
     ) as api:
         yield api

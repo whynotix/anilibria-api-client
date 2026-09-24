@@ -1,16 +1,13 @@
 API Models
 ==========
 
-API Models hand-maded
+Pydantic models are generated from the OpenAPI schema and live in the external
+`anilibria_api_types` package.
 
-.. automodule:: anilibria_api_client.models.models
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Response models
+--------------
 
-API Legacy models
-
-.. automodule:: anilibria_api_client.models.legacy_models
+.. automodule:: anilibria_api_types.codegen.responses.models
    :members:
    :undoc-members:
    :show-inheritance:
