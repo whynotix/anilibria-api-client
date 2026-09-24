@@ -35,7 +35,8 @@ def test_build_url_with_params() -> None:
         params={"query": "тест", "page": 1},
     )
     assert url.startswith("https://example.com/api/v1/search?")
-    assert "query=" in url and "page=1" in url
+    assert "query=" in url
+    assert "page=1" in url
 
 
 def test_build_url_merges_existing_query() -> None:
@@ -45,7 +46,8 @@ def test_build_url_merges_existing_query() -> None:
         params={"y": 2},
     )
     assert url.count("?") == 1
-    assert "x=1" in url and "y=2" in url
+    assert "x=1" in url
+    assert "y=2" in url
 
 
 def test_create_proxy_auth() -> None:
