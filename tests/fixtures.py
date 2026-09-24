@@ -20,9 +20,7 @@ def get_auth_params() -> tuple[str, str]:
 
 
 @pytest_asyncio.fixture()
-async def anilibria_api_client() -> typing.AsyncGenerator[
-    AsyncAnilibriaAPI, None
-]:
+async def anilibria_api_client() -> typing.AsyncGenerator[AsyncAnilibriaAPI]:
     token = os.getenv("ANILIBRIA_API_TOKEN")
     if not token:
         raise ValueError("Not ANILIBRIA_API_TOKEN in .env file")
@@ -32,7 +30,7 @@ async def anilibria_api_client() -> typing.AsyncGenerator[
 
 
 @pytest_asyncio.fixture()
-async def base_api_client() -> typing.AsyncGenerator[API, None]:
+async def base_api_client() -> typing.AsyncGenerator[API]:
     token = os.getenv("ANILIBRIA_API_TOKEN")
     if not token:
         raise ValueError("Not ANILIBRIA_API_TOKEN in .env file")

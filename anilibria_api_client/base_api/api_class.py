@@ -1,5 +1,5 @@
 from types import TracebackType
-from typing import Any
+from typing import Any, Self
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 import aiohttp
@@ -42,7 +42,7 @@ class API:
         self._own_session = False
         self._in_context = False
 
-    async def __aenter__(self) -> "API":
+    async def __aenter__(self) -> Self:
         self._in_context = True
         await self._ensure_session()
         return self

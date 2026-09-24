@@ -74,7 +74,7 @@ async def test_auth_without_token_raises(monkeypatch) -> None:
 async def test_async_download_default_dir(monkeypatch) -> None:
     captured: dict = {}
 
-    def fake_download(**kwargs):
+    def fake_download(**kwargs) -> str:
         captured.update(kwargs)
         return "done"
 
@@ -92,7 +92,7 @@ async def test_async_download_default_dir(monkeypatch) -> None:
 async def test_async_download_with_output_path(monkeypatch, tmp_path) -> None:
     captured: dict = {}
 
-    def fake_download(**kwargs):
+    def fake_download(**kwargs) -> str:
         captured.update(kwargs)
         return "done"
 
@@ -114,7 +114,7 @@ async def test_async_download_with_output_path(monkeypatch, tmp_path) -> None:
 async def test_async_download_bare_filename(monkeypatch) -> None:
     captured: dict = {}
 
-    def fake_download(**kwargs):
+    def fake_download(**kwargs) -> str:
         captured.update(kwargs)
         return "done"
 
