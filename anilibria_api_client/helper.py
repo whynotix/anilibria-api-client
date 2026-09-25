@@ -14,7 +14,7 @@ async def auth(
     client: AsyncAnilibriaAPI, login: str, password: str
 ) -> AsyncAnilibriaAPI:
     """
-    Простая авторизация одной строкой.
+    Simple one-line authentication.
 
     :param client: Экземпляр AsyncAnilibriaAPI
     :param login: Логин от ЛК Anilibria
@@ -41,7 +41,8 @@ async def async_download(
     url: str, output_path: str | None = None, filename: str = "output.mp4"
 ) -> Any:
     """
-    Позволяет скачивать серию через URL (https://cache-rfn.libria.fun/videos/media/)
+    Downloads an episode from an m3u8 URL
+    (https://cache-rfn.libria.fun/videos/media/).
 
     ffmpeg required
 
@@ -72,7 +73,7 @@ async def async_download(
 
 async def download_torrent_file(torrent_bytes: bytes, filename: str) -> bool:
     """
-    Асинхронно сохраняет .torrent файл
+    Asynchronously saves a .torrent file.
 
     :param torrent_bytes: бинарные данные torrent-файла
     :param filename: имя файла
@@ -90,9 +91,9 @@ async def auto_paginate(
     api_function: Any, limit: int = 100, *args: Any, **kwargs: Any
 ) -> list[Any]:
     """
-    Автоматически применяет пагинацию и выводит все данные.
+    Automatically applies pagination and returns all data.
 
-    Не включайте в свой запрос page и limit!
+    Do not include page and limit in your request!
 
     :param api_function: Функция API
     :param limit: Ограничение на количество элементов

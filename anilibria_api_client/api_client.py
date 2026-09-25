@@ -13,10 +13,11 @@ from anilibria_api_client.base_api.api_class import API
 
 class AsyncAnilibriaAPI:
     """
-    Асинхронный клиент для работы с AnilibriaAPI, базируется на API (base_api/api_class.py)
+    Asynchronous client for working with AnilibriaAPI, based on API
+    (base_api/api_class.py).
 
-    Жизненным циклом сессии управляет `self.api` (класс `API`):
-    используйте `async with` по `self.api` или вызывайте `await self.api.close()`.
+    The session lifecycle is managed by `self.api` (the `API` class):
+    use `async with` on `self.api` or call `await self.api.close()`.
     """
 
     def __init__(
@@ -30,7 +31,7 @@ class AsyncAnilibriaAPI:
         proxy_headers: dict[str, str] | None = None,
     ) -> None:
         """
-        Инициализация асинхронного API клиента.
+        Initializes the async API client.
 
         :param base_url: Базовый URL API
         :param token: Токен для авторизации (Bearer)
@@ -76,7 +77,7 @@ class AsyncAnilibriaAPI:
         **kwargs,
     ) -> dict[str, Any] | str | bytes:
         """
-        Создание своего уникального запроса
+        Creates your own custom request.
 
         :param endpoint: Конечная точка API (обязательно)
         :param method: Метод используемый для запроса, например GET

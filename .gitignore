@@ -13,3 +13,4 @@ _generated
 *ruff*
 .vscode
 .coverage
+docs/_build/
