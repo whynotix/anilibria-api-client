@@ -1,8 +1,8 @@
-name: Enchancement
+name: Enhancement
 description: New function or another one
 
 labels: [ "enhancement" ]
-assignees: "whynotix"
+assignees: ["whynotix"]
 
 body:
   - type: textarea

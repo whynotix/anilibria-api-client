@@ -6,6 +6,12 @@ on:
     paths:
       - "anilibria_api_client/**"
       - "tests/**"
+      - "pyproject.toml"
+      - "poetry.lock"
+      - ".github/**"
+
+permissions:
+  contents: read
 
 jobs:
   pre-pr-tests:
@@ -23,6 +29,7 @@ jobs:
           install-dev: "true"
 
       - name: Create .env file
+        if: github.actor != 'dependabot[bot]'
         env:
           ANILIBRIA_API_TOKEN: ${{ secrets.ANILIBRIA_API_TOKEN }}
           LOGIN: ${{ secrets.LOGIN }}
@@ -32,14 +39,20 @@ jobs:
           echo "LOGIN=$LOGIN" >> .env
           echo "PASSWORD=$PASSWORD" >> .env
 
-      - name: Run tests with pytest
+      - name: Run full test suite with pytest
+        if: github.actor != 'dependabot[bot]'
         run: |
           poetry run pytest -q tests/ -s
+
+      - name: Run offline unit tests with pytest (Dependabot PR)
+        if: github.actor == 'dependabot[bot]'
+        run: |
+          poetry run pytest -q tests/unit/ -s
 
   pre-pr-bump-lock-file:
     name: Bump lock file
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
 
     permissions:
       contents: write
