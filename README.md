@@ -18,7 +18,7 @@ Developed and tested with Python 3.13. While it may work with other versions (ol
 $ pip install anilibria-api-client
 ```
 
-## Usage (ts is old segment and will be deleted in v1.0.0rc3)
+## Usage
 
 ```python
 from anilibria_api_client.api_client import AsyncAnilibriaAPI  # Client
