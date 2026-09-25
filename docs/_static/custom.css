@@ -25,38 +25,55 @@ h2,
     letter-spacing: -0.01em;
 }
 
-/* ---- Landing hero ------------------------------------------------------- */
+/* ---- Landing column width ----------------------------------------------
+   The landing page removes the secondary sidebar, so Furo's fixed 46em
+   content column leaves an empty strip on the right. Only the landing page
+   (its only page with a .hero) is widened and centred. */
 
-.hero {
+.page:has(.hero) .content {
+    margin-left: auto;
+    margin-right: auto;
+    width: min(72rem, 100%);
+}
+
+/* ---- Landing hero -------------------------------------------------------
+   clear:both keeps the card below Furo's floated page-action icons, so the
+   card is not squeezed into a narrower box and the icons never overlap it.
+
+   `.. container:: hero` also receives Furo's `.container` class, and
+   furo-extensions.css sets `[role=main] .container{padding-left:0;
+   padding-right:0}`. Targeting `article[role="main"] .hero` out-specifies
+   that rule, so the card finally keeps real breathing room on all sides. */
+
+article[role="main"] .hero {
     position: relative;
-    margin: 0 0 2.5rem;
-    padding: 3.5rem 2.5rem;
+    clear: both;
+    margin: 0.5rem 0 2.5rem;
+    padding: clamp(2.75rem, 4.5vw, 4rem) clamp(1.75rem, 4.5vw, 4rem);
     border: 1px solid var(--color-background-border);
     border-radius: 1.25rem;
     overflow: hidden;
-    background:
+    background-color: var(--color-background-secondary);
+    background-image:
         radial-gradient(
-            120% 140% at 0% 0%,
-            color-mix(in srgb, var(--color-brand-primary) 20%, transparent),
-            transparent 60%
+            120% 120% at 12% 0%,
+            color-mix(in srgb, var(--color-brand-primary) 12%, transparent),
+            transparent 58%
+        ),
+        radial-gradient(
+            110% 130% at 100% 6%,
+            color-mix(in srgb, var(--color-brand-content) 8%, transparent),
+            transparent 62%
         ),
         linear-gradient(
-            160deg,
+            180deg,
             var(--color-background-secondary),
-            var(--color-background-primary)
+            color-mix(
+                in srgb,
+                var(--color-background-secondary) 60%,
+                var(--color-background-primary)
+            )
         );
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(
-        60% 60% at 100% 0%,
-        color-mix(in srgb, var(--color-brand-content) 16%, transparent),
-        transparent 70%
-    );
 }
 
 .hero p {
@@ -64,25 +81,27 @@ h2,
 }
 
 .hero-kicker p {
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
+    margin-bottom: 0.55rem;
+    color: var(--color-brand-content);
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--color-brand-content);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
 }
 
 .hero-title p {
-    margin: 0.4rem 0 0.75rem;
+    margin-bottom: 0.6rem;
     font-family: "Unbounded", var(--font-stack);
-    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-size: clamp(2rem, 4.5vw, 3rem);
     font-weight: 700;
-    line-height: 1.05;
+    line-height: 1.06;
     color: var(--color-foreground-primary);
 }
 
 .hero-lede p {
-    max-width: 46ch;
+    max-width: 48ch;
     font-size: 1.05rem;
+    line-height: 1.55;
     color: var(--color-foreground-secondary);
 }
 
@@ -96,7 +115,7 @@ h2,
 }
 
 .hero-actions {
-    margin-top: 1.5rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
 }
 
 .hero-actions .sd-btn {
@@ -124,7 +143,14 @@ h2,
     width: auto;
 }
 
-/* ---- Feature cards ------------------------------------------------------ */
+/* ---- Feature card grid --------------------------------------------------
+   Reset the sphinx-design container padding so the card borders line up with
+   the hero card, the badge row and the code blocks on the same left edge. */
+
+.page:has(.hero) .sd-container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 .sd-card {
     border-radius: 1rem;
@@ -165,17 +191,66 @@ code.literal {
     padding: 0.1em 0.35em;
 }
 
-/* ---- API signatures ----------------------------------------------------- */
+/* ---- API signatures -----------------------------------------------------
+   Furo renders signatures as a hanging-indent block with a floated [source]
+   link. The negative text-indent is reset here so every line starts at the
+   same place, and the source link is pinned to the top-right corner so it can
+   never wrap onto its own line or collide with the signature text. */
 
 dl.py > dt.sig {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.45rem 7rem 0.45rem 0.85rem;
     border-left: 3px solid var(--color-brand-content);
     border-radius: 0 0.5rem 0.5rem 0;
-    padding-left: 0.75rem;
     background: var(--color-api-background, var(--color-background-secondary));
+    text-indent: 0;
 }
 
 dl.py > dt.sig:hover {
     background: var(--color-api-background-hover, var(--color-background-hover));
+}
+
+dl.py > dt.sig a.reference.internal .viewcode-link {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    width: auto;
+    min-width: 0;
+    font-size: var(--font-size--small--2, 0.8125rem);
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* ---- Heading scale and API metadata ------------------------------------- */
+
+article h1 {
+    font-size: 1.9rem;
+}
+
+article h2 {
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.4rem;
+}
+
+article h3 {
+    font-size: 1.15rem;
+}
+
+/* "Bases: object" is the first paragraph inside a class description. */
+dl.py.class > dd > p:first-child {
+    margin: 0.35rem 0 0.5rem;
+    color: var(--color-foreground-muted);
+    font-size: var(--font-size--small);
+}
+
+/* Tighten the gap between a class signature and its first method. */
+dl.py.class > dd > dl.py.method:first-of-type {
+    margin-top: 0.5rem;
 }
 
 /* ---- Admonitions -------------------------------------------------------- */
@@ -193,9 +268,13 @@ dl.py > dt.sig:hover {
 /* ---- Responsive and motion preferences ---------------------------------- */
 
 @media (max-width: 46rem) {
-    .hero {
-        padding: 2.25rem 1.5rem;
+    article[role="main"] .hero {
+        padding: clamp(2rem, 6vw, 2.75rem) clamp(1.25rem, 5vw, 2rem);
         border-radius: 1rem;
+    }
+
+    dl.py > dt.sig {
+        padding-right: 5.5rem;
     }
 }
 
