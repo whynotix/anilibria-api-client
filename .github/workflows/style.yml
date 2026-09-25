@@ -45,7 +45,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.ruff.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.event.inputs.branch_name || 'auto-style/ruff-fixes' }}
