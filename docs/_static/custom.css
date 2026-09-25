@@ -25,15 +25,63 @@ h2,
     letter-spacing: -0.01em;
 }
 
-/* ---- Landing column width ----------------------------------------------
-   The landing page removes the secondary sidebar, so Furo's fixed 46em
-   content column leaves an empty strip on the right. Only the landing page
-   (its only page with a .hero) is widened and centred. */
+/* ---- Global page layout -------------------------------------------------
+   Furo hard-codes its column widths and exposes no width custom properties
+   for them (`.content{width:46em}`, `.sidebar-drawer{width:calc(50% - 26em)}`,
+   `.sidebar-container,.toc-drawer{width:15em}`). The values are collected into
+   `--aac-*` variables here and applied to Furo's own class names, so every
+   page - not just the landing page - uses the same wide, centred column. The
+   sidebar drawer is narrowed to exactly its container so the nav sits flush at
+   the left edge instead of leaving an empty gutter, and the "On this page"
+   column stays directly beside the content instead of floating in dead space.
+   Furo's own breakpoints are respected: the sidebar is inline only above 63em,
+   the secondary TOC is inline only above 82em, and below 48em Furo switches
+   the content column to `width:100%` (untouched here). */
 
-.page:has(.hero) .content {
-    margin-left: auto;
-    margin-right: auto;
-    width: min(72rem, 100%);
+:root {
+    --aac-sidebar-width: 15rem;
+    --aac-toc-width: 15rem;
+    --aac-content-max: 80rem;
+}
+
+/* Sidebar: fixed, flush-left column wherever Furo keeps it inline. */
+@media (min-width: 63.01em) {
+    .page > .sidebar-drawer {
+        width: var(--aac-sidebar-width);
+        min-width: 0;
+    }
+
+    .sidebar-container {
+        width: var(--aac-sidebar-width);
+    }
+}
+
+/* Content: fills the available width up to --aac-content-max, centred as a
+   group with the secondary TOC so the two never separate. */
+@media (min-width: 48.01em) {
+    .main {
+        justify-content: center;
+        min-width: 0;
+    }
+
+    .main > .content {
+        flex: 1 1 auto;
+        width: auto;
+        min-width: 0;
+        max-width: var(--aac-content-max);
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: clamp(1rem, 4vw, 2.5rem);
+        padding-right: clamp(1rem, 4vw, 2.5rem);
+    }
+}
+
+/* Secondary TOC: only pin its width where Furo keeps it inline (above 82em). */
+@media (min-width: 82.01em) {
+    .main > .toc-drawer {
+        flex: 0 0 var(--aac-toc-width);
+        width: var(--aac-toc-width);
+    }
 }
 
 /* ---- Landing hero -------------------------------------------------------
