@@ -1,7 +1,7 @@
 # anilibria-api-client
 
 
-[![pypi](https://img.shields.io/pypi/v/anilibria-api-client.svg)](https://pypi.org/project/anilibria-api-client/) [![LICENSE](https://img.shields.io/github/license/whynotix/anilibria-api-client)](https://github.com/whynotix/Anilibria-Api-Client/blob/main/LICENSE) [![Python](https://img.shields.io/pypi/pyversions/anilibria-api-client.svg)](https://pypi.org/project/anilibria-api-client/)
+[![pypi](https://img.shields.io/pypi/v/anilibria-api-client.svg?label=current-version)](https://pypi.org/project/anilibria-api-client/) [![LICENSE](https://img.shields.io/github/license/whynotix/anilibria-api-client)](https://github.com/whynotix/Anilibria-Api-Client/blob/main/LICENSE) [![Python](https://img.shields.io/pypi/pyversions/anilibria-api-client.svg)](https://pypi.org/project/anilibria-api-client/) [![anilibria-api-types](https://img.shields.io/pypi/v/anilibria-api-types?label=anilibria-api-types)](https://pypi.org/project/types/)
 
 > [!CAUTION]  
 > **It is not an official wrapper.** [Official AniLibria's Swagger](https://anilibria.top/api/docs/v1)
