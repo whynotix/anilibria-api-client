@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="anilibria-api-client">
+  <title>anilibria-api-client</title>
+  <path d="M25.6 10.4 Q32 4 38.4 10.4 L53.6 25.6 Q60 32 53.6 38.4 L38.4 53.6 Q32 60 25.6 53.6 L10.4 38.4 Q4 32 10.4 25.6 Z" fill="none" stroke="#0f7c8a" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M27 22.5 L27 41.5 L44 32 Z" fill="#0f7c8a"/>
+  <path d="M20 41 L23 44 L20 47 L17 44 Z" fill="#e5566d"/>
+</svg>

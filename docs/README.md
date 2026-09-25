@@ -1,8 +1,9 @@
-# Anilibria-Api-Client (docs)
-Here you can see docs. In feature will be comleted...
+# Anilibria-Api-Client docs
 
-## About stable and latest
+Sphinx documentation source for `anilibria-api-client`, built with the Furo
+theme and hosted on Read the Docs.
 
-Latest take files from docs and rebuild site (https://anilibria-api-client.readthedocs.io/latest/)
+## `latest` vs `stable`
 
-Stable take files from main and rebuild site (https://anilibria-api-client.readthedocs.io/stable/)
+- `latest` builds from the `docs/` directory (the working tree).
+- `stable` builds from the `main` branch.

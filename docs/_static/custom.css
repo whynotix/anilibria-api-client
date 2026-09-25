@@ -1,18 +1,337 @@
-.wy-side-nav-search {
-    background-color: #343131;
+/* anilibria-api-client docs - custom design layer.
+   Everything here reads from Furo's CSS variables, so light and dark mode
+   stay in sync. The palette itself is defined in docs/conf.py through
+   light_css_variables / dark_css_variables. Do not hardcode brand colors
+   in this file. */
+
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root,
+body {
+    --font-stack: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-stack--monospace: "JetBrains Mono", ui-monospace, SFMono-Regular,
+        Menlo, monospace;
 }
 
-.wy-nav-top {
-    background: #343131;
+body {
+    font-feature-settings: "ss01", "cv01";
 }
 
-.highlight {
-    border-radius: 4px;
-    margin: 1em 0;
+h1,
+h2,
+.hero-title,
+.sidebar-brand-text {
+    font-family: "Unbounded", var(--font-stack);
+    letter-spacing: -0.01em;
 }
 
-.sig.sig-object {
-    border-left: 3px solid #e1e1e1;
-    padding-left: 10px;
-    margin: 5px 0;
+/* ---- Global page layout -------------------------------------------------
+   Furo hard-codes its column widths and exposes no width custom properties
+   for them (`.content{width:46em}`, `.sidebar-drawer{width:calc(50% - 26em)}`,
+   `.sidebar-container,.toc-drawer{width:15em}`). The values are collected into
+   `--aac-*` variables here and applied to Furo's own class names, so every
+   page - not just the landing page - uses the same wide, centred column. The
+   sidebar drawer is narrowed to exactly its container so the nav sits flush at
+   the left edge instead of leaving an empty gutter, and the "On this page"
+   column stays directly beside the content instead of floating in dead space.
+   Furo's own breakpoints are respected: the sidebar is inline only above 63em,
+   the secondary TOC is inline only above 82em, and below 48em Furo switches
+   the content column to `width:100%` (untouched here). */
+
+:root {
+    --aac-sidebar-width: 15rem;
+    --aac-toc-width: 15rem;
+    --aac-content-max: 80rem;
+}
+
+/* Sidebar: fixed, flush-left column wherever Furo keeps it inline. */
+@media (min-width: 63.01em) {
+    .page > .sidebar-drawer {
+        width: var(--aac-sidebar-width);
+        min-width: 0;
+    }
+
+    .sidebar-container {
+        width: var(--aac-sidebar-width);
+    }
+}
+
+/* Content: fills the available width up to --aac-content-max, centred as a
+   group with the secondary TOC so the two never separate. */
+@media (min-width: 48.01em) {
+    .main {
+        justify-content: center;
+        min-width: 0;
+    }
+
+    .main > .content {
+        flex: 1 1 auto;
+        width: auto;
+        min-width: 0;
+        max-width: var(--aac-content-max);
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: clamp(1rem, 4vw, 2.5rem);
+        padding-right: clamp(1rem, 4vw, 2.5rem);
+    }
+}
+
+/* Secondary TOC: only pin its width where Furo keeps it inline (above 82em). */
+@media (min-width: 82.01em) {
+    .main > .toc-drawer {
+        flex: 0 0 var(--aac-toc-width);
+        width: var(--aac-toc-width);
+    }
+}
+
+/* ---- Landing hero -------------------------------------------------------
+   clear:both keeps the card below Furo's floated page-action icons, so the
+   card is not squeezed into a narrower box and the icons never overlap it.
+
+   `.. container:: hero` also receives Furo's `.container` class, and
+   furo-extensions.css sets `[role=main] .container{padding-left:0;
+   padding-right:0}`. Targeting `article[role="main"] .hero` out-specifies
+   that rule, so the card finally keeps real breathing room on all sides. */
+
+article[role="main"] .hero {
+    position: relative;
+    clear: both;
+    margin: 0.5rem 0 2.5rem;
+    padding: clamp(2.75rem, 4.5vw, 4rem) clamp(1.75rem, 4.5vw, 4rem);
+    border: 1px solid var(--color-background-border);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background-color: var(--color-background-secondary);
+    background-image:
+        radial-gradient(
+            120% 120% at 12% 0%,
+            color-mix(in srgb, var(--color-brand-primary) 12%, transparent),
+            transparent 58%
+        ),
+        radial-gradient(
+            110% 130% at 100% 6%,
+            color-mix(in srgb, var(--color-brand-content) 8%, transparent),
+            transparent 62%
+        ),
+        linear-gradient(
+            180deg,
+            var(--color-background-secondary),
+            color-mix(
+                in srgb,
+                var(--color-background-secondary) 60%,
+                var(--color-background-primary)
+            )
+        );
+}
+
+.hero p {
+    margin: 0;
+}
+
+.hero-kicker p {
+    margin-bottom: 0.55rem;
+    color: var(--color-brand-content);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.hero-title p {
+    margin-bottom: 0.6rem;
+    font-family: "Unbounded", var(--font-stack);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.06;
+    color: var(--color-foreground-primary);
+}
+
+.hero-lede p {
+    max-width: 48ch;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--color-foreground-secondary);
+}
+
+.hero-actions,
+.hero-actions p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.hero-actions {
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+
+.hero-actions .sd-btn {
+    border-radius: 999px;
+    padding: 0.5rem 1.25rem;
+}
+
+/* ---- Badge row ---------------------------------------------------------- */
+
+.badge-row,
+.badge-row p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.badge-row {
+    margin-bottom: 2rem;
+}
+
+.badge-row img {
+    height: 20px;
+    width: auto;
+}
+
+/* ---- Feature card grid --------------------------------------------------
+   Reset the sphinx-design container padding so the card borders line up with
+   the hero card, the badge row and the code blocks on the same left edge. */
+
+.page:has(.hero) .sd-container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sd-card {
+    border-radius: 1rem;
+}
+
+.feature-card {
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        border-color 160ms ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-brand-content);
+    box-shadow: 0 12px 28px -18px
+        color-mix(in srgb, var(--color-brand-primary) 60%, transparent);
+}
+
+.feature-card .sd-card-title {
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: var(--color-foreground-secondary);
+}
+
+/* ---- Code blocks -------------------------------------------------------- */
+
+div.highlight {
+    border: 1px solid var(--color-background-border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+code.literal {
+    border-radius: 0.35rem;
+    padding: 0.1em 0.35em;
+}
+
+/* ---- API signatures -----------------------------------------------------
+   Furo renders signatures as a hanging-indent block with a floated [source]
+   link. The negative text-indent is reset here so every line starts at the
+   same place, and the source link is pinned to the top-right corner so it can
+   never wrap onto its own line or collide with the signature text. */
+
+dl.py > dt.sig {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.45rem 7rem 0.45rem 0.85rem;
+    border-left: 3px solid var(--color-brand-content);
+    border-radius: 0 0.5rem 0.5rem 0;
+    background: var(--color-api-background, var(--color-background-secondary));
+    text-indent: 0;
+}
+
+dl.py > dt.sig:hover {
+    background: var(--color-api-background-hover, var(--color-background-hover));
+}
+
+dl.py > dt.sig a.reference.internal .viewcode-link {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    width: auto;
+    min-width: 0;
+    font-size: var(--font-size--small--2, 0.8125rem);
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* ---- Heading scale and API metadata ------------------------------------- */
+
+article h1 {
+    font-size: 1.9rem;
+}
+
+article h2 {
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.4rem;
+}
+
+article h3 {
+    font-size: 1.15rem;
+}
+
+/* "Bases: object" is the first paragraph inside a class description. */
+dl.py.class > dd > p:first-child {
+    margin: 0.35rem 0 0.5rem;
+    color: var(--color-foreground-muted);
+    font-size: var(--font-size--small);
+}
+
+/* Tighten the gap between a class signature and its first method. */
+dl.py.class > dd > dl.py.method:first-of-type {
+    margin-top: 0.5rem;
+}
+
+/* ---- Admonitions -------------------------------------------------------- */
+
+.admonition {
+    border: 1px solid var(--color-background-border);
+    border-radius: 0.75rem;
+}
+
+.admonition > .admonition-title {
+    font-family: var(--font-stack);
+    font-weight: 600;
+}
+
+/* ---- Responsive and motion preferences ---------------------------------- */
+
+@media (max-width: 46rem) {
+    article[role="main"] .hero {
+        padding: clamp(2rem, 6vw, 2.75rem) clamp(1.25rem, 5vw, 2rem);
+        border-radius: 1rem;
+    }
+
+    dl.py > dt.sig {
+        padding-right: 5.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .feature-card {
+        transition: none;
+    }
+
+    .feature-card:hover {
+        transform: none;
+    }
 }

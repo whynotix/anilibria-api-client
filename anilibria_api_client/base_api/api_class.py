@@ -9,8 +9,8 @@ from ..exceptions import AnilibriaException, AnilibriaValidationException
 
 class API:
     """
-    Асинхронный класс для работы с API.
-    Предоставляет основные методы для отправки HTTP-запросов и работы с URL.
+    Asynchronous class for working with the API.
+    Provides basic methods for sending HTTP requests and working with URLs.
     """
 
     def __init__(
@@ -23,7 +23,7 @@ class API:
         proxy_headers: dict[str, str] | None = None,
     ) -> None:
         """
-        Инициализация асинхронного API клиента.
+        Initializes the async API client.
 
         :param base_url: Базовый URL API
         :param headers: Заголовки по умолчанию для всех запросов
@@ -77,13 +77,13 @@ class API:
             self._own_session = False
 
     async def close(self) -> None:
-        """Закрывает сессию, если она принадлежит этому экземпляру."""
+        """Closes the session if it is owned by this instance."""
         await self._close_session()
 
     @staticmethod
     def build_query_string(params: dict[str, Any]) -> str:
         """
-        Создает query string из параметров.
+        Builds a query string from parameters.
 
         :param params: Словарь параметров
         :return: Строка вида ?key1=value1&key2=value2
@@ -102,7 +102,7 @@ class API:
         base_url: str, endpoint: str, params: dict[str, Any] | None = None
     ) -> str:
         """
-        Строит полный URL с параметрами.
+        Builds a full URL with query parameters.
 
         :param base_url: Базовый URL
         :param endpoint: Конечная точка
@@ -125,8 +125,8 @@ class API:
 
     @staticmethod
     def create_proxy_auth(username: str, password: str) -> str:
-        """Кодирует логин/пароль прокси в значение заголовка
-        Proxy-Authorization (``Basic <base64>``)."""
+        """Encodes proxy login/password into a Proxy-Authorization header
+        value (``Basic <base64>``)."""
         return aiohttp.encode_basic_auth(username, password)
 
     async def request(
@@ -143,7 +143,7 @@ class API:
         **kwargs,
     ) -> dict[str, Any] | str | bytes:
         """
-        Базовый метод для отправки HTTP-запросов.
+        Base method for sending HTTP requests.
 
         :param method: HTTP метод (GET, POST, PUT, DELETE и т.д.)
         :param endpoint: Конечная точка API (относительный путь)
@@ -237,7 +237,7 @@ class API:
         **kwargs,
     ) -> dict[str, Any] | str | bytes:
         """
-        Отправка GET запроса.
+        Sends a GET request.
 
         :param endpoint: Конечная точка API
         :param params: Параметры запроса
@@ -268,7 +268,7 @@ class API:
         **kwargs,
     ) -> dict[str, Any] | str | bytes:
         """
-        Отправка POST запроса.
+        Sends a POST request.
 
         :param endpoint: Конечная точка API
         :param data: Тело запроса
@@ -298,7 +298,7 @@ class API:
         **kwargs,
     ) -> dict[str, Any] | str | bytes:
         """
-        Отправка DELETE запроса.
+        Sends a DELETE request.
 
         :param endpoint: Конечная точка API
         :param headers: Дополнительные заголовки
