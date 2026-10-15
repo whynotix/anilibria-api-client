@@ -34,7 +34,6 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "Topic :: Utilities",
     "Typing :: Typed",
-    "License :: Public Domain",
 ]
 
 [project.urls]
