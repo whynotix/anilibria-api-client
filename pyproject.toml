@@ -36,7 +36,7 @@ exclude = ["tests*", "dist*", "build*", "docs*"]
 
 [project.optional-dependencies]
 docs = [
-    "sphinx>=9.1,<10",
+    "sphinx>=9.2.0,<10",
     "furo>=2025.12.19",
     "sphinx-design>=0.7.0,<0.8",
     "sphinx-autodoc-typehints>=3.17.2,<4",
