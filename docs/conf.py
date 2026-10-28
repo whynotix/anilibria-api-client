@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 import os
 import sys
 import tomllib
@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 project = "anilibria-api-client"
 author = "whynotix"
-copyright = f"{datetime.datetime.now().year}, whynotix"
+copyright = f"{dt.datetime.now().year}, whynotix"
 
 try:
     release = _dist_version("anilibria-api-client")
