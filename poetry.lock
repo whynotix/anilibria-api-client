@@ -257,14 +257,14 @@ files = [
 
 [[package]]
 name = "anilibria-api-types"
-version = "1.0.1"
+version = "1.0.2"
 description = ""
 optional = false
 python-versions = "<4.0.0,>=3.13"
 groups = ["main"]
 files = [
-    {file = "anilibria_api_types-1.0.1-py3-none-any.whl", hash = "sha256:dc458e7e43cf9a65b67672ac9d542c72a67558cefeef5446a4bdc12db08f0a0d"},
-    {file = "anilibria_api_types-1.0.1.tar.gz", hash = "sha256:7aec360d4e12298e288cfe9ff6353e57cc84db512a9865ed2aaadf9377404d9b"},
+    {file = "anilibria_api_types-1.0.2-py3-none-any.whl", hash = "sha256:25b2d0a3c7de3e8096e8d623a0828471e4dea1c81df7fb57aa57b53f414aae30"},
+    {file = "anilibria_api_types-1.0.2.tar.gz", hash = "sha256:5fd4bec3b3edf163af7b12e6d1a05dedc7718848bd79e54f1d286427cbd17389"},
 ]
 
 [package.dependencies]
@@ -273,7 +273,7 @@ aiohttp = ">=3.14.3,<4.0.0"
 anilibria-api-client = ">=1.0.2,<2.0.0"
 jsonref = ">=1.1.0,<2.0.0"
 pydantic = ">=2.13.3,<3.0.0"
-pydantic-settings = ">=2.16.1,<3.0.0"
+pydantic-settings = ">=2.16.2,<3.0.0"
 python-dotenv = ">=1.2.4,<2.0.0"
 
 [[package]]
@@ -2208,4 +2208,4 @@ docs = ["furo", "sphinx", "sphinx-autodoc-typehints", "sphinx-design"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0.0"
-content-hash = "71040cdfb69367dbe8fc95d76796d31f287ab565cbbe1ab9c86776ef0710bcb6"
+content-hash = "74db6482b6e5341a8ca98a1b9e030a1b537c47c75cded5591f606602ea00265b"
