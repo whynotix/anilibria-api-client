@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "anilibria-api-client"
-version = "1.0.2"
+version = "1.0.4"
 description = "Async aiohttp client for the AniLibria API (anime, titles, torrents, player)"
 keywords = ["anilibria", "anime", "api", "client", "async", "asyncio", "aiohttp", "swagger", "torrent"]
 authors = [
