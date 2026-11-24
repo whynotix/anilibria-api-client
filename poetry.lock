@@ -257,14 +257,14 @@ files = [
 
 [[package]]
 name = "anilibria-api-types"
-version = "1.0.2"
+version = "1.0.3"
 description = ""
 optional = false
 python-versions = "<4.0.0,>=3.13"
 groups = ["main"]
 files = [
-    {file = "anilibria_api_types-1.0.2-py3-none-any.whl", hash = "sha256:25b2d0a3c7de3e8096e8d623a0828471e4dea1c81df7fb57aa57b53f414aae30"},
-    {file = "anilibria_api_types-1.0.2.tar.gz", hash = "sha256:5fd4bec3b3edf163af7b12e6d1a05dedc7718848bd79e54f1d286427cbd17389"},
+    {file = "anilibria_api_types-1.0.3-py3-none-any.whl", hash = "sha256:f2e244341c6922c250bd8ae26c494f0c7196842552277a121a4dc5709b83cf66"},
+    {file = "anilibria_api_types-1.0.3.tar.gz", hash = "sha256:02281970c93c72ed33e2aed65876869902f6920c6b99f10525ae9f9c1de739ef"},
 ]
 
 [package.dependencies]
@@ -273,7 +273,7 @@ aiohttp = ">=3.14.3,<4.0.0"
 anilibria-api-client = ">=1.0.2,<2.0.0"
 jsonref = ">=1.1.0,<2.0.0"
 pydantic = ">=2.13.3,<3.0.0"
-pydantic-settings = ">=2.16.2,<3.0.0"
+pydantic-settings = ">=2.16.3,<3.0.0"
 python-dotenv = ">=1.2.4,<2.0.0"
 
 [[package]]
@@ -1591,14 +1591,14 @@ typing-extensions = ">=4.14.1"
 
 [[package]]
 name = "pydantic-settings"
-version = "2.16.2"
+version = "2.16.3"
 description = "Settings management using Pydantic"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "pydantic_settings-2.16.2-py3-none-any.whl", hash = "sha256:8d523e5c129b097686bde019bd6109bff53f4c8c3f63f1ddf9933ffa42e5ab4f"},
-    {file = "pydantic_settings-2.16.2.tar.gz", hash = "sha256:3dc08ffabed2bbd5dc2dd55ead7b78b4e4c5cd776aecd04310db5f1224caaf46"},
+    {file = "pydantic_settings-2.16.3-py3-none-any.whl", hash = "sha256:d1db16a2d34006323a1b42c0640898da58adfbad7ec30baaa9e2b18aafc08999"},
+    {file = "pydantic_settings-2.16.3.tar.gz", hash = "sha256:10e36f616623ebb586c05ca3d3cd22927146869db413d4f14c20c514442a1337"},
 ]
 
 [package.dependencies]
@@ -2210,4 +2210,4 @@ docs = ["furo", "sphinx", "sphinx-autodoc-typehints", "sphinx-design"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0.0"
-content-hash = "ac83bb6206cf6ec266a75d188c085ff9190bf108de717efe937cfdd789781c50"
+content-hash = "9c108226f6c5246d732679de40e6b08873d7e1d2ccb14c9797b07a6e888742a4"
