@@ -1835,15 +1835,15 @@ test = ["defusedxml (>=0.7.1)"]
 
 [[package]]
 name = "sphinx-autodoc-typehints"
-version = "3.17.6"
+version = "3.17.7"
 description = "Render Python type hints in Sphinx autodoc documentation"
 optional = true
 python-versions = ">=3.12"
 groups = ["main"]
 markers = "extra == \"docs\""
 files = [
-    {file = "sphinx_autodoc_typehints-3.17.6-py3-none-any.whl", hash = "sha256:0242291ff90300ca43748ae3f61ae34a39b23ae0f1d43e500621802cde6502b8"},
-    {file = "sphinx_autodoc_typehints-3.17.6.tar.gz", hash = "sha256:d5b8dace7d1b8688869033ab7d5307139b3f02e67d40446e2bafd707a08dad68"},
+    {file = "sphinx_autodoc_typehints-3.17.7-py3-none-any.whl", hash = "sha256:ed74adcd3f54f6c9530a7ffebe52c6c771c1371248641208b3d69fe4e88ff3bb"},
+    {file = "sphinx_autodoc_typehints-3.17.7.tar.gz", hash = "sha256:7796aec473aafac09d37158586fe96092ac50c4c66b427b24b7101343ce084bd"},
 ]
 
 [package.dependencies]
@@ -2210,4 +2210,4 @@ docs = ["furo", "sphinx", "sphinx-autodoc-typehints", "sphinx-design"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0.0"
-content-hash = "9c108226f6c5246d732679de40e6b08873d7e1d2ccb14c9797b07a6e888742a4"
+content-hash = "7f2183a6fb341effb7bdb77cd3e81fa5c7b273d043b185202f5c2b8644e9558d"
